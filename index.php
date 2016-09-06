@@ -10,7 +10,10 @@
 
 <tr>
 <td style="background-color:#eeeeee;">
-	MOIMOIMOTIAOIJSODIJASDoAIJSK
+	Username:<input type="text" name="Username" id="Username"><br>
+	Password:<input type="text" name="Password" id="Password"><br>
+
+	<input type="submit" name="login" value="Login" >
 </td> </tr>
 </table>
 
