@@ -1,14 +1,11 @@
 <?php
-   define('SQLSERVER', 'localhost:3036');
-   define('SQLUSERNAME', 'root');
-   define('SQLPASSWORD', 'rootpassword');
-   define('SQLDATABASE', 'database');
-   $database = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASE);
-   
-   // Check connection
-   if (!$conn) {
-   	die("Connection failed: " . mysqli_connect_error());
-   }
-   echo "Connected successfully";
+   define('SQLSERVER', 'localhost:5432');
+   define('SQLUSERNAME', 'postgres');
+   define('SQLPASSWORD', 'sunzhihao');
+   define('SQLDATABASE', 'test');
 
+   $database = pg_connect("host=localhost port=5432 dbname=test user=postgres password=sunzhihao")
+    or die('Could not connect: ' . pg_last_error());
+
+    
 ?>
