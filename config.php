@@ -8,9 +8,9 @@
    $database = pg_connect("host=127.0.0.1 port=5432 dbname=postgres user=postgres password=sunzhihao");
 
    if(!$database){
-         echo "Error : Unable to open database\n";
+         echo "Error : Unable to open database<br>";
       } else {
-         echo "Opened database successfully\n";
+         echo "Opened database successfully<br>";
       }
 
 

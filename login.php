@@ -1,32 +1,48 @@
 <?php
-	include("config.php")
-	session_start()
+	include("config.php");
+	session_start();
 
 	// Let's process login information, if we have any
    if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-      $username = mysqli_real_escape_string($db,$_POST['username']);
-      $password = mysqli_real_escape_string($db,$_POST['password']);
+      $username = $_POST['username'];
+      $password = $_POST['password'];
 
-      $sql = "SELECT username FROM users WHERE username = '$username' and passcode = '$password'";
-      $result = mysqli_query($database,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      $active = $row['active'];
+      $sql = "SELECT username FROM users WHERE username = '$username' and password = '$password'";
 
-      $count = mysqli_num_rows($result);
+		  $result = pg_query($database, $sql);
+
+			if (!$result) {
+				 die("Error in SQL query: " . pg_last_error());
+		  }
+
+			// iterate over result set
+ 		 // print each row
+ 		 /*while ($row = pg_fetch_array($result)) {
+ 				 echo "Title: " . $row[0] . "<br />";
+ 				 echo "Format: " . $row[1] . "<p />";
+ 		 }*/
+
+		 $count = pg_num_rows($result);
 
       // We should get only one results, if the login was successfull
 
       if($count == 1) {
-         session_register("username");
-         $_SESSION['login_user'] = $username;
+				 echo "MOI";
+				 $ver = phpversion();
+				 echo "$ver";
 
+				 $_SESSION['login_user'] = $username;
+				 echo "Logged in!<br>";
          header("location: index.php");
-         $error = ""
       }else {
          $error = "Your Login Name or Password is invalid";
       }
    }
+
+	 // free memory
+	 pg_free_result($result);
+
 ?>
 
 <html>
