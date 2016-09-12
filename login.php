@@ -57,9 +57,9 @@
 
 			<tr>
 			<td style="background-color:#eeeeee;">
-				<form action = "" method = "post">>
+				<form action = "" method = "post">
 				Username: <input type="text" name="username"><br>
-				Password: <input type="text" name="password"><br>
+				Password: <input type="password" name="password"><br>
 				<center><input type="submit" name="formSubmit" value="Submit" ></center>
 				</form>
 			</td> </tr>
