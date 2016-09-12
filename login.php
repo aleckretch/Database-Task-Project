@@ -1,32 +1,32 @@
 <?php
 	include("config.php")
 	session_start()
-	
+
 	// Let's process login information, if we have any
    if($_SERVER["REQUEST_METHOD"] == "POST") {
-      
+
       $username = mysqli_real_escape_string($db,$_POST['username']);
-      $password = mysqli_real_escape_string($db,$_POST['password']); 
-      
+      $password = mysqli_real_escape_string($db,$_POST['password']);
+
       $sql = "SELECT username FROM users WHERE username = '$username' and passcode = '$password'";
       $result = mysqli_query($database,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $active = $row['active'];
-      
+
       $count = mysqli_num_rows($result);
-      
+
       // We should get only one results, if the login was successfull
-      		
+
       if($count == 1) {
          session_register("username");
          $_SESSION['login_user'] = $username;
-         
+
          header("location: index.php");
          $error = ""
       }else {
          $error = "Your Login Name or Password is invalid";
       }
-   }	
+   }
 ?>
 
 <html>
