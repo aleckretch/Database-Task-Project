@@ -19,8 +19,8 @@
   if (!$result) {
      die("Error in SQL query: " . pg_last_error());
   }
-  echo "moi";
-  // iterate over result set
+
+ // iterate over result set
  // print each row
  while ($row = pg_fetch_array($result)) {
      echo "<tr><td> Username: $row[0] </td>";

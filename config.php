@@ -9,9 +9,7 @@
 
    if(!$database){
          echo "Error : Unable to open database<br>";
-      } else {
-         echo "Opened database successfully<br>";
-      }
+   }
 
 
 ?>
