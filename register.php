@@ -77,7 +77,7 @@
 				// If we got an error, let's print in
 				if ($error != "") {
 					echo "<tr><td>";
-					echo $error;
+					echo "Error in register.php: " . $error;
 					echo "</td></tr>";
 				}
 			?>

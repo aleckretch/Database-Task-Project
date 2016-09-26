@@ -13,7 +13,7 @@
 		  $result = pg_query($database, $sql);
 
 			if (!$result) {
-				 die("Error in SQL query: " . pg_last_error());
+				 die("Error in SQL query in login.php: " . pg_last_error());
 		  }
 
 			// iterate over result set
