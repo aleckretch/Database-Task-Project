@@ -29,25 +29,7 @@
     }
   }
 
-  if($logined_in) {
-    if(isset($_POST['claimTask'])) {
-      $task_id = $_POST['claimTask'];
-
-      $sql = "SELECT * FROM tasks WHERE id = $task_id";
-
-      $result = pg_query($database, $sql);
-
-      if (!$result) {
-         die("Tasks owned fetch error: " . pg_last_error());
-      }
-
-      $task = pg_fetch_array($result);
-
-      
-    }
-  }
-
-  $sql = "SELECT * FROM tasks WHERE assigner IS NULL";
+  $sql = "SELECT * FROM tasks t WHERE owner = '$username' OR assigner = '$username'";
 
   $tasks = pg_query($database, $sql);
 
@@ -84,24 +66,22 @@
       <th>Description</th>
       <th>Date</th>
       <th>Owner</th>
-      <th>Claim The Task</th>
+      <th>View Detail</th>
     </thead>
     <tbody>
-      <form action="browse.php" method="POST">
       <?php
         while ($row = pg_fetch_array($tasks)) {
              echo "<tr>
-                    <td>".$row[0]."</td>
-                    <td>".$row[1]."</td>
-                    <td>".$row[2]."</td>
-                    <td>".$row[3]."</td>
-                    <td>".$row[9]."</td>
-                    <td><button type='submit' name='claimTask' class='btn btn-success' value='".$row[0]."'>Claim</button></td>
+                  <td>".$row[0]."</td>
+                  <td>".$row[1]."</td>
+                  <td>".$row[2]."</td>
+                  <td>".$row[3]."</td>
+                  <td>".$row[9]."</td>
+                  <td><a href='detail.php?task=".$row[0]."'>Detail</a></td>
              </tr>";
          }
 
       ?>
-    </form>
     </tbody>
   </table>
 </div>

@@ -24,7 +24,7 @@
      die("Error in SQL query in initialize.php: " . pg_last_error());
   	}
 
-	$sql = "INSERT INTO users VALUES ('Mark', '1234', 'normal'), ('Lisa', 'abcd', 'normal')";
+	$sql = "INSERT INTO users VALUES ('Mark', '1234', 'normal'), ('Lisa', 'abcd', 'normal'), ('admin', 'password', 'admin')";
 	$result = pg_query($database, $sql);
 
 	if (!$result) {
