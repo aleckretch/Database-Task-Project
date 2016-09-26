@@ -16,4 +16,5 @@
 	}
 
 	pg_close($dbh);
+	echo "Tables deleted successful. Please run the initialize.php to create data"
 ?>
