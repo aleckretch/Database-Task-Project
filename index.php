@@ -5,7 +5,7 @@
 
   if(!isset($_SESSION['login_user'])){
       header("location:login.php");
-   } 
+   }
 
   $username = $_SESSION['login_user'];
   //Let's fetch all the users
@@ -43,7 +43,7 @@
 <head> <title>Task management system</title> </head>
 <body>
 
-<h1>Welcome to Task management system</h1>
+<h1>Welcome to Task management system, <?php echo "$username"; ?>!</h1>
 <h3>Tasks Your issued</h3>
 
 <table>
@@ -69,6 +69,7 @@
   </tbody>
 </table>
 
+<a href="logout.php">Logout</a>
 
 </body>
 </html>

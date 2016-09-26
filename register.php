@@ -1,14 +1,14 @@
 <?php
 	include("config.php");
-	session_start();
 
-	// Let's process login information, if we have any
+	// Let's process registration information, if we have any
    if($_SERVER["REQUEST_METHOD"] == "POST") {
 
       $username = $_POST['username'];
       $password = $_POST['password'];
 
-      $sql = "SELECT username FROM users WHERE username = '$username' and password = '$password'";
+      // Let's see if the username is available
+      $sql = "SELECT username FROM users WHERE username = '$username'";
 
 		  $result = pg_query($database, $sql);
 
@@ -16,23 +16,24 @@
 				 die("Error in SQL query: " . pg_last_error());
 		  }
 
-			// iterate over result set
- 		 // print each row
- 		 /*while ($row = pg_fetch_array($result)) {
- 				 echo "Title: " . $row[0] . "<br />";
- 				 echo "Format: " . $row[1] . "<p />";
- 		 }*/
-
 		 $count = pg_num_rows($result);
 
-      // We should get only one results, if the login was successfull
+      // If we get results, the username is taken!
 
-      if($count == 1) {
-				 // Login was successfull!
-				 $_SESSION['login_user'] = $username;
-         header("location: index.php");
+      if($count != 0) {
+				 // The username is already taken.
+         $error = "Username is already taken!";
       }else {
-         $error = "Your Login Name or Password is invalid";
+         // Let's create the user!
+         $sql = "INSERT INTO users VALUES ('$username', '$password', 'normal')";
+
+   		   $result = pg_query($database, $sql);
+
+   			 if (!$result) {
+   			 	 die("Error in SQL query: " . pg_last_error());
+   		   }
+
+         $error = "User created!";
       }
    }
 
@@ -41,6 +42,7 @@
 
 ?>
 
+
 <html>
 	<head>
 		<title>TaskRabbit Task management system - Login</title>
@@ -48,7 +50,7 @@
 	<body>
 		<table align="center" border="1px">
 			<tr> <td>
-			<h1> <u>Login</u></h1>
+			<h1> <u>Registration</u></h1>
 			</td></tr>
 
 			<tr>
@@ -59,7 +61,7 @@
 				<center><input type="submit" name="formSubmit" value="Submit" ></center>
 				</form>
 			</td> </tr>
-			<tr><td align="center">Click <a href="register.php">here</a> to register.</td></tr>
+			<tr><td align="center">Click <a href="login.php">here</a> to return to login screen.</td></tr>
 			<?php
 				// If we got an error, let's print in
 				if ($error != "") {
