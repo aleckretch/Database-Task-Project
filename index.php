@@ -88,9 +88,6 @@ li {
   </tbody>
 </table>
 
-<<<<<<< HEAD
-<a href="logout.php">Logout</a>
-=======
 <h3>Tasks Your claimed</h3>
 
 <table>
@@ -111,10 +108,10 @@ li {
                 <td>".$row[3]."</td>
            </tr>";
        }
->>>>>>> 3fb76816465f535e6fadfae4084167f5349966b8
-
     ?>
   </tbody>
 </table>
+
+<a href="logout.php">Logout</a>
 </body>
 </html>
