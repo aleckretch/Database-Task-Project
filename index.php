@@ -13,7 +13,7 @@
   $result = pg_query($database, $sql);
 
   if (!$result) {
-     die("Error in SQL query: " . pg_last_error());
+     die("Error in SQL query in index.php: " . pg_last_error());
   }
 
   $count = pg_num_rows($result);
@@ -27,7 +27,7 @@
   $tasks_owned = pg_query($database, $sql);
 
   if (!$result) {
-     die("Tasks owned fetch error: " . pg_last_error());
+     die("Tasks owned fetch error in index.php: " . pg_last_error());
   }
 
   $sql = "SELECT * FROM tasks WHERE assigner = '$username'";
@@ -35,7 +35,7 @@
   $tasks_assigned = pg_query($database, $sql);
 
   if (!$result) {
-     die("Tasks assigned fetch error: " . pg_last_error());
+     die("Tasks assigned fetch error in index.php: " . pg_last_error());
   }
  ?>
 
