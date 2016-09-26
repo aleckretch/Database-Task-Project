@@ -1,18 +1,21 @@
 <?php
    include('config.php');
    session_start();
-   
+
    $user_check = $_SESSION['login_user'];
-   
-   $ses_sql = mysqli_query($db,"select username from admin where username = '$user_check' ");
-   
-   $row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
-   
-   $login_session = $row['username'];
-   
-   if(!isset($_SESSION['login_user'])){
-      header("location:login.php");
-   } else {
-   	  header("location:index.php");
+
+   $sql = "SELECT username FROM users WHERE username = '$user_check'";
+   $result = pg_query($database, $sql);
+
+   if (!$result) {
+      die("Error in SQL query: " . pg_last_error());
+   }
+
+   $count = pg_num_rows($result);
+
+   if($count != 1) {
+     // User is not logged in!
+     header("location:login.php");
    }
 ?>
+moi
