@@ -41,7 +41,25 @@
 
 <html>
 <head> <title>Task management system</title> </head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
+</style>
 <body>
+
+<ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="browse.php">Browse</a></li>
+    <li><a href="newTask.php">Create new Task</a></li>
+    <li><a href="#">My Tasks</a></li>
+</ul>
 
 <h1>Welcome to Task management system</h1>
 <h3>Tasks Your issued</h3>
@@ -69,6 +87,29 @@
   </tbody>
 </table>
 
+<h3>Tasks Your claimed</h3>
 
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Date</th>
+    <th>Time</th>
+  </thead>
+  <tbody>
+    <?php
+      while ($row = pg_fetch_array($tasks_assigned)) {
+           echo "<tr>
+                <td>".$row[0]."</td>
+                <td>".$row[1]."</td>
+                <td>".$row[2]."</td>
+                <td>".$row[3]."</td>
+           </tr>";
+       }
+
+    ?>
+  </tbody>
+</table>
 </body>
 </html>
