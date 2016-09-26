@@ -56,7 +56,7 @@
 
 			<tr>
 			<td>
-				<form action = "" method = "post">
+				<form action = "<?php echo basename($_SERVER['PHP_SELF']); ?>" method = "post">
 					<div class="row">
 			      <div class="form-group">
 			        <label for="username">Username</label>
@@ -73,11 +73,17 @@
 			</td> </tr>
 			<tr><td align="center">Click <a href="register.php">here</a> to register.</td></tr>
 			<?php
-				// If we got an error, let's print in
+				// If we got a message, let's print it
+				if ($_GET['message'] != "") {
+					echo "<tr><td><center>";
+					echo $_GET['message'];
+					echo "</center></td></tr>";
+				}
+				// If we got an error, let's print it
 				if ($error != "") {
-					echo "<tr><td>";
+					echo "<tr><td><center>";
 					echo $error;
-					echo "</td></tr>";
+					echo "</center></td></tr>";
 				}
 			?>
 		</table>

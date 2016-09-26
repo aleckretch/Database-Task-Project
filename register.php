@@ -33,7 +33,9 @@
    			 	 die("Error in SQL query in register.php: " . pg_last_error());
    		   }
 
-         $error = "User created!";
+				 $message = urlencode("User created successfully!");
+				 header("Location:login.php?message=".$message);
+
       }
    }
 
