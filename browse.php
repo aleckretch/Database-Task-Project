@@ -43,18 +43,18 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <body>
-
-<div class="row">
-  <ul class="nav navbar-nav">
-       <li><a href="#">Home</a></li>
-      <li><a href="browse.php">Browse</a></li>
-      <li><a href="newTask.php">Create new Task</a></li>
-      <li><a href="#">My Tasks</a></li>
-      <li><a href="logout.php">Logout</a></li>
-  </ul>
-</div>
-
 <div class="container">
+
+  <div class="row">
+    <ul class="nav navbar-nav">
+         <li><a href="index.php">Home</a></li>
+        <li><a href="browse.php">Browse</a></li>
+        <li><a href="newTask.php">Create new Task</a></li>
+        <li><a href="#">My Tasks</a></li>
+        <li><a href="logout.php">Logout</a></li>
+    </ul>
+  </div>
+
   <div class="row">
     <h3>Tasks List</h3>
   </div>

@@ -32,17 +32,18 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <body>
 
-<div class="row">
-  <ul class="nav navbar-nav">
-       <li><a href="index.php">Home</a></li>
-      <li><a href="browse.php">Browse</a></li>
-      <li><a href="newTask.php">Create new Task</a></li>
-      <li><a href="#">My Tasks</a></li>
-      <li><a href="logout.php">Logout</a></li>
-  </ul>
-</div>
-
 <div class="container">
+
+  <div class="row">
+    <ul class="nav navbar-nav">
+         <li><a href="index.php">Home</a></li>
+        <li><a href="browse.php">Browse</a></li>
+        <li><a href="newTask.php">Create new Task</a></li>
+        <li><a href="#">My Tasks</a></li>
+        <li><a href="logout.php">Logout</a></li>
+    </ul>
+  </div>
+  
   <div class="row">
     <h3>Create Your new Task</h3>
   </div>
@@ -62,6 +63,16 @@
       <div class="form-group">
         <label for="taskDate">Task Date</label><br/>
         <input type="date" id="taskDate" name="date" required class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="taskStartTime">Task Start Time</label><br/>
+        <input type="time" id="taskStartTime" name="starttime" required class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="taskEndTime">Task End Time</label><br/>
+        <input type="time" id="taskEndTime" name="endtime" required class="form-control" />
       </div>
 
       <input type="submit" name="taskSubmission" value="Submit" class="btn btn-success" />
