@@ -1,9 +1,9 @@
 <?php
   $SQLSERVER = "localhost";
-  $SQLPORT = 5432;
+  $SQLPORT = 5433;
   $SQLUSERNAME = "postgres";
   $SQLPASSWORD = "sunzhihao";
-  $SQLDATABASE = "test";
+  $SQLDATABASE = "postgres";
 
    $database = pg_connect("host=$SQLSERVER port=$SQLPORT dbname=$SQLDATABASE user=$SQLUSERNAME password=$SQLPASSWORD");
 
