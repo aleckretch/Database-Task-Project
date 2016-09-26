@@ -58,7 +58,7 @@
   </div>
 
   <h1>Welcome to Task management system, <?php echo "$username"; ?>!</h1>
-  
+
   <div class="row">
     <h3>Tasks Your issued</h3>
   </div>
@@ -75,13 +75,14 @@
     <tbody>
       <?php
         while ($row = pg_fetch_array($tasks_owned)) {
-             echo "<tr>
+            echo "<tr>
                   <td>".$row[0]."</td>
                   <td>".$row[1]."</td>
                   <td>".$row[2]."</td>
                   <td>".$row[3]."</td>
-             </tr>";
-         }
+           </tr>";
+        }
+
 
       ?>
     </tbody>

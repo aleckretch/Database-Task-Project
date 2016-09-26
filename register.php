@@ -50,9 +50,9 @@
 	</head>
 	<body>
 		<div class="container">
-		<table align="center" class="table">
+		<table class="table">
 			<tr> <td>
-			<h1> <u>Registration</u></h1>
+			<h1> <center>Registration</center></h1>
 			</td></tr>
 
 			<tr>

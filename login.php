@@ -49,9 +49,9 @@
 	<body>
 		<div class="container">
 
-		<table align="center" class="table">
+		<table class="table">
 			<tr> <td>
-			<h1> <u>Login</u></h1>
+			<center><h1>Login</h1></center>
 			</td></tr>
 
 			<tr>
