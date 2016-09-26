@@ -8,7 +8,7 @@
       $username = $_POST['username'];
       $password = $_POST['password'];
 
-      $sql = "SELECT username FROM users WHERE username = '$username' and password = '$password'";
+      $sql = "SELECT u.username, u.password, u.salt FROM users u WHERE u.username = '$username'";
 
 		  $result = pg_query($database, $sql);
 
@@ -22,15 +22,20 @@
  				 echo "Title: " . $row[0] . "<br />";
  				 echo "Format: " . $row[1] . "<p />";
  		 }*/
-
-		 $count = pg_num_rows($result);
-
-      // We should get only one results, if the login was successfull
-
-      if($count == 1) {
-				 // Login was successfull!
-				 $_SESSION['login_user'] = $username;
-         header("location: index.php");
+	  // We should get only one results, if the username exists.
+      $count = pg_num_rows($result);
+	  if($count == 1) {
+		$row = pg_fetch_row($result);
+	    $salt = $row[2];
+	    $saltedPassword = md5($password . $salt);
+		
+		if($saltedPassword == $row[1]) {
+		   // Login was successfull!
+		   $_SESSION['login_user'] = $username;
+           header("location: index.php");
+		}else {
+		  $error = "Your Login Name or Password is invalid";
+		}
       }else {
          $error = "Your Login Name or Password is invalid";
       }

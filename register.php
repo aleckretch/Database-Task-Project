@@ -25,7 +25,10 @@
          $error = "Username is already taken!";
       }else {
          // Let's create the user!
-         $sql = "INSERT INTO users VALUES ('$username', '$password', 'normal')";
+		 $baseStr = time() . rand(0, 1000000) . rand(0, 1000000);
+	     $salt = md5($baseStr);
+		 $saltedPassword = md5($password . $salt);
+         $sql = "INSERT INTO users VALUES ('$username', '$saltedPassword', '$salt', 'normal')";
 
    		   $result = pg_query($database, $sql);
 
