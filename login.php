@@ -65,7 +65,7 @@
 			</td> </tr>
 			<?php
 				// If we got an error, let's print in
-				if ($error == "") {
+				if ($error != "") {
 					echo "<tr><td>";
 					echo $error;
 					echo "</td></tr>";
