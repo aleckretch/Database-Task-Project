@@ -43,6 +43,8 @@
 
         $sql = "INSERT INTO tasks (title , description , task_date , start_hour , start_min, end_hour, end_min, owner) VALUES('$title' , '$description' , '$date', $start_hour, $start_min , $end_hour , $end_min , '$username')";
 
+        // echo $sql;
+
         $result = pg_query($database, $sql);
 
         if (!$result) {
