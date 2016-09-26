@@ -54,33 +54,37 @@
   </ul>
 </div>
 
-<h3>Tasks List</h3>
+<div class="container">
+  <div class="row">
+    <h3>Tasks List</h3>
+  </div>
 
-<table class="table table-borded table-hover">
-  <thead>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Date</th>
-    <th>Owner</th>
-    <th>View Detail</th>
-  </thead>
-  <tbody>
-    <?php
-      while ($row = pg_fetch_array($tasks)) {
-           echo "<tr>
-                <td>".$row[0]."</td>
-                <td>".$row[1]."</td>
-                <td>".$row[2]."</td>
-                <td>".$row[3]."</td>
-                <td>".$row[9]."</td>
-                <td><a href='detail.php?task=".$row[0]."'>Detail</a></td>
-           </tr>";
-       }
+  <table class="table table-borded table-hover">
+    <thead>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Owner</th>
+      <th>View Detail</th>
+    </thead>
+    <tbody>
+      <?php
+        while ($row = pg_fetch_array($tasks)) {
+             echo "<tr>
+                  <td>".$row[0]."</td>
+                  <td>".$row[1]."</td>
+                  <td>".$row[2]."</td>
+                  <td>".$row[3]."</td>
+                  <td>".$row[9]."</td>
+                  <td><a href='detail.php?task=".$row[0]."'>Detail</a></td>
+             </tr>";
+         }
 
-    ?>
-  </tbody>
-</table>
+      ?>
+    </tbody>
+  </table>
+</div>
 
 </body>
 </html>

@@ -57,56 +57,61 @@
 </ul>
 </div>
 
-<br/>
-<h3>Tasks Your issued</h3>
+<div class="container">
+  <div class="row">
+    <h3>Tasks Your issued</h3>
+  </div>
 
 
-<table class="table table-borded table-hover">
-  <thead>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Date</th>
-    <th>Time</th>
-  </thead>
-  <tbody>
-    <?php
-      while ($row = pg_fetch_array($tasks_owned)) {
-           echo "<tr>
-                <td>".$row[0]."</td>
-                <td>".$row[1]."</td>
-                <td>".$row[2]."</td>
-                <td>".$row[3]."</td>
-           </tr>";
-       }
+  <table class="table table-borded table-hover">
+    <thead>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Time</th>
+    </thead>
+    <tbody>
+      <?php
+        while ($row = pg_fetch_array($tasks_owned)) {
+             echo "<tr>
+                  <td>".$row[0]."</td>
+                  <td>".$row[1]."</td>
+                  <td>".$row[2]."</td>
+                  <td>".$row[3]."</td>
+             </tr>";
+         }
 
-    ?>
-  </tbody>
-</table>
+      ?>
+    </tbody>
+  </table>
 
-<h3>Tasks Your claimed</h3>
+  <div class="row">
+    <h3>Tasks Your Claimed</h3>
+  </div>
 
-<table class="table table-borded table-hover">
-  <thead>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Date</th>
-    <th>Time</th>
-  </thead>
-  <tbody>
-    <?php
-      while ($row = pg_fetch_array($tasks_assigned)) {
-           echo "<tr>
-                <td>".$row[0]."</td>
-                <td>".$row[1]."</td>
-                <td>".$row[2]."</td>
-                <td>".$row[3]."</td>
-           </tr>";
-       }
-    ?>
-  </tbody>
-</table>
+  <table class="table table-borded table-hover">
+    <thead>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Time</th>
+    </thead>
+    <tbody>
+      <?php
+        while ($row = pg_fetch_array($tasks_assigned)) {
+             echo "<tr>
+                  <td>".$row[0]."</td>
+                  <td>".$row[1]."</td>
+                  <td>".$row[2]."</td>
+                  <td>".$row[3]."</td>
+             </tr>";
+         }
+      ?>
+    </tbody>
+  </table>
+</div>
 
 </body>
 </html>

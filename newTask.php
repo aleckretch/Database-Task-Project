@@ -34,7 +34,7 @@
 
 <div class="row">
   <ul class="nav navbar-nav">
-       <li><a href="#">Home</a></li>
+       <li><a href="index.php">Home</a></li>
       <li><a href="browse.php">Browse</a></li>
       <li><a href="newTask.php">Create new Task</a></li>
       <li><a href="#">My Tasks</a></li>
@@ -42,20 +42,31 @@
   </ul>
 </div>
 
-<h3>Create Your new Task</h3>
+<div class="container">
+  <div class="row">
+    <h3>Create Your new Task</h3>
+  </div>
 
-<form method="POST" action="newTask.php" >
-  
-  <label for="taskTitle">Task Title</label>
-  <input type="text" id="taskTitle" name="title" required maxlength="20" /><br/>
+  <form method="POST" action="newTask.php" >
+    <div class="row">
+      <div class="form-group">
+        <label for="taskTitle">Task Title</label>
+        <input type="text" id="taskTitle" name="title" required maxlength="20" class="form-control" />
+      </div>
 
-  <label for="taskDesc">Task Description</label><br/>
-  <textarea id="taskDesc" name="description" required>Please fill in your task description</textarea><br/>
+      <div class="form-group">
+        <label for="taskDesc">Task Description</label><br/>
+        <textarea id="taskDesc" name="description" required class="form-control">Please fill in your task description</textarea>
+      </div>
 
-  <label for="taskDate">Task Date</label><br/>
-  <input type="date" id="taskDate" name="date" required /><br/>
+      <div class="form-group">
+        <label for="taskDate">Task Date</label><br/>
+        <input type="date" id="taskDate" name="date" required class="form-control" />
+      </div>
 
-  <input type="submit" name="taskSubmission" value="Submit" />
-</form>
+      <input type="submit" name="taskSubmission" value="Submit" class="btn btn-success" />
+    </div>
+  </form>
+</div>
 </body>
 </html>
