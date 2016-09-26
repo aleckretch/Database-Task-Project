@@ -6,7 +6,7 @@
 	$result = pg_query($database, $init);
 
 	if (!$result) {
-     die("Error in SQL query: " . pg_last_error());
+     die("Error in SQL query in initialize.php: " . pg_last_error());
   	}
 
   	$init = "CREATE TABLE IF NOT EXISTS tasks (id SERIAL PRIMARY KEY, title VARCHAR(40) NOT NULL, 
@@ -19,14 +19,14 @@
 	$result = pg_query($database, $init);
 
 	if (!$result) {
-     die("Error in SQL query: " . pg_last_error());
+     die("Error in SQL query in initialize.php: " . pg_last_error());
   	}
 
 	$sql = "INSERT INTO users VALUES ('Mark', '1234', 'normal'), ('Lisa', 'abcd', 'normal')";
 	$result = pg_query($database, $sql);
 
 	if (!$result) {
-      die("Error in SQL query: " . pg_last_error());
+      die("Error in SQL query in initialize.php: " . pg_last_error());
  	}
 
     echo 'init successful';

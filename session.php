@@ -8,7 +8,7 @@
    $result = pg_query($database, $sql);
 
    if (!$result) {
-      die("Error in SQL query: " . pg_last_error());
+      die("Error in SQL query in session.php: " . pg_last_error());
    }
 
    $count = pg_num_rows($result);
