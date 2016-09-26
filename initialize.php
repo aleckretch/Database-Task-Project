@@ -9,7 +9,7 @@
      die("Error in SQL query: " . pg_last_error());
   	}
 
-  	$init = "CREATE TABLE IF NOT EXISTS tasks (id integer SERIAL PRIMARY KEY, title VARCHAR(40) NOT NULL, 
+  	$init = "CREATE TABLE IF NOT EXISTS tasks (id SERIAL PRIMARY KEY, title VARCHAR(40) NOT NULL, 
   		description VARCHAR(254) NOT NULL default '', 
   		task_date date NOT NULL default CURRENT_DATE, 
   		start_hour integer NOT NULL CHECK (start_hour >= 0 AND start_hour < 24), start_min integer NOT NULL CHECK (start_min >= 0 AND start_min < 60), 
@@ -30,7 +30,7 @@
  	}
 
     echo 'init successful';
-  }
+  
 
  // close connection
  pg_close($dbh);
