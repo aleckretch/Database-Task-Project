@@ -46,19 +46,30 @@
 <html>
 	<head>
 		<title>TaskRabbit Task management system - Login</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
 	</head>
 	<body>
-		<table align="center" border="1px">
+		<div class="container">
+		<table align="center" class="table">
 			<tr> <td>
 			<h1> <u>Registration</u></h1>
 			</td></tr>
 
 			<tr>
-			<td style="background-color:#eeeeee;">
+			<td>
 				<form action = "" method = "post">
-				Username: <input type="text" name="username"><br>
-				Password: <input type="password" name="password"><br>
-				<center><input type="submit" name="formSubmit" value="Submit" ></center>
+					<div class="row">
+			      <div class="form-group">
+			        <label for="username">Username</label>
+			        <input type="text" id="username" name="username" required maxlength="20" class="form-control" />
+			      </div>
+
+			      <div class="form-group">
+			        <label for="password">Password</label><br/>
+			        <input type="password" id="password" name="password" required class="form-control"></input>
+			      </div>
+
+			      <input type="submit" name="formSubmit" value="Register" class="btn btn-success" />
 				</form>
 			</td> </tr>
 			<tr><td align="center">Click <a href="login.php">here</a> to return to login screen.</td></tr>
