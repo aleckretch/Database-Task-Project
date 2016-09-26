@@ -108,6 +108,7 @@
       <th>Description</th>
       <th>Date</th>
       <th>Time</th>
+      <th>Owner</th>
     </thead>
     <tbody>
       <?php
@@ -117,6 +118,8 @@
                   <td>".$row[1]."</td>
                   <td>".$row[2]."</td>
                   <td>".$row[3]."</td>
+                  <td>".$row[4].":".$row[5]." - ".$row[6].":".$row[7]."</td>
+                  <td>".$row[9]."</td>
              </tr>";
          }
       ?>
