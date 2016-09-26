@@ -41,31 +41,27 @@
 
 <html>
 <head> <title>Task management system</title> </head>
-<style>
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
 
-li {
-    display: inline;
-}
-</style>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <body>
 
 <h1>Welcome to Task management system, <?php echo "$username"; ?>!</h1>
 
-<ul>
-    <li><a href="#">Home</a></li>
+<div class="row">
+<ul class="nav navbar-nav">
+     <li><a href="#">Home</a></li>
     <li><a href="browse.php">Browse</a></li>
     <li><a href="newTask.php">Create new Task</a></li>
     <li><a href="#">My Tasks</a></li>
+    <li><a href="logout.php">Logout</a></li>
 </ul>
+</div>
 
+<br/>
 <h3>Tasks Your issued</h3>
 
-<table>
+
+<table class="table table-borded table-hover">
   <thead>
     <th>ID</th>
     <th>Title</th>
@@ -88,12 +84,9 @@ li {
   </tbody>
 </table>
 
-<<<<<<< HEAD
-<a href="logout.php">Logout</a>
-=======
 <h3>Tasks Your claimed</h3>
 
-<table>
+<table class="table table-borded table-hover">
   <thead>
     <th>ID</th>
     <th>Title</th>
@@ -111,7 +104,6 @@ li {
                 <td>".$row[3]."</td>
            </tr>";
        }
->>>>>>> 3fb76816465f535e6fadfae4084167f5349966b8
 
     ?>
   </tbody>

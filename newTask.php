@@ -29,29 +29,23 @@
 
  <html>
 <head> <title>Task management system</title> </head>
-<style>
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    display: inline;
-}
-</style>
+<link href="css/bootstrap.min.css" rel="stylesheet" />
 <body>
 
-<ul>
-    <li><a href="index.php">Home&nbsp</a></li>
-    <li><a href="browse.php">Browse&nbsp</a></li>
-    <li><a href="#">Create new Task&nbsp</a></li>
-    <li><a href="#">My Tasks&nbsp</a></li>
-</ul>
+<div class="row">
+  <ul class="nav navbar-nav">
+       <li><a href="#">Home</a></li>
+      <li><a href="browse.php">Browse</a></li>
+      <li><a href="newTask.php">Create new Task</a></li>
+      <li><a href="#">My Tasks</a></li>
+      <li><a href="logout.php">Logout</a></li>
+  </ul>
+</div>
 
 <h3>Create Your new Task</h3>
 
 <form method="POST" action="newTask.php" >
+  
   <label for="taskTitle">Task Title</label>
   <input type="text" id="taskTitle" name="title" required maxlength="20" /><br/>
 
