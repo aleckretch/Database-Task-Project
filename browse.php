@@ -29,6 +29,8 @@
     }
   }
 
+  $myself_claim = false;
+
   if($logined_in) {
     if(isset($_POST['claimTask'])) {
       $task_id = $_POST['claimTask'];
@@ -43,7 +45,19 @@
 
       $task = pg_fetch_array($result);
 
-      
+      $task_owner = $task[9];
+
+      if($username == $task_owner) {
+        $myself_claim = true;
+      } else {
+        $sql = "UPDATE tasks SET assigner = '$username' WHERE id = $task_id";
+
+        $result = pg_query($database, $sql);
+
+        if (!$result) {
+           die("Database update error: " . pg_last_error());
+        }
+      }
     }
   }
 
@@ -51,7 +65,7 @@
 
   $tasks = pg_query($database, $sql);
 
-  if (!$result) {
+  if (!$tasks) {
      die("Tasks owned fetch error: " . pg_last_error());
   }
  ?>
@@ -76,6 +90,16 @@
   <div class="row">
     <h3>Tasks List</h3>
   </div>
+
+  <?php 
+    if($myself_claim) {
+      echo '<div class="alert fade in  alert-danger">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  This is your task!
+            </div>';
+    }
+  
+  ?>
 
   <table class="table table-borded table-hover">
     <thead>

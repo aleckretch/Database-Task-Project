@@ -71,15 +71,25 @@
       <th>Description</th>
       <th>Date</th>
       <th>Time</th>
+      <th>Assign To</th>
     </thead>
     <tbody>
       <?php
         while ($row = pg_fetch_array($tasks_owned)) {
+
+          $assign_to = $row[8];
+
+          if(!$assign_to) {
+            $assign_to = "Not assigned";
+          }
+
              echo "<tr>
                   <td>".$row[0]."</td>
                   <td>".$row[1]."</td>
                   <td>".$row[2]."</td>
                   <td>".$row[3]."</td>
+                  <td>".$row[4].":".$row[5]." - ".$row[6].":".$row[7]."</td>
+                  <td>$assign_to</td>
              </tr>";
          }
 
