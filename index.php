@@ -58,7 +58,7 @@
   </div>
 
   <h1>Welcome to Task management system, <?php echo "$username"; ?>!</h1>
-  
+
   <div class="row">
     <h3>Tasks Your issued</h3>
   </div>
@@ -90,8 +90,8 @@
                   <td>".$row[3]."</td>
                   <td>".$row[4].":".$row[5]." - ".$row[6].":".$row[7]."</td>
                   <td>$assign_to</td>
-             </tr>";
-         }
+           </tr>";
+        }
 
       ?>
     </tbody>
