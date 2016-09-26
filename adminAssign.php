@@ -12,12 +12,18 @@
   $sql = "SELECT username FROM users WHERE username = '$username' AND type = 'admin'";
   $result = pg_query($database, $sql);
   $count = pg_num_rows($result);
-  if ($count == 1)
+  if ($count != 1)
   {
-    echo "Is admin";
+    header("location:login.php");
   }
-  else
-  {
-    echo "Access forbidden";
-  }
+
+  //$tasksql = "SELECT * FROM tasks WHERE assigner IS NOT NULL and status = 'pending'";
+
+  //$tasks = pg_query($database, $tasksql);
+
+  //if (!$tasks) {
+  //   die("Tasks owned fetch error: " . pg_last_error());
+  //}
+
 ?>
+
