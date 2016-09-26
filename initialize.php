@@ -16,7 +16,7 @@
   		end_hour integer NOT NULL CHECK (end_hour >= 0 AND end_hour < 24), end_min integer NOT NULL CHECK (end_min >= 0 AND end_min < 60),
   		assigner VARCHAR(254) REFERENCES users, owner VARCHAR(254) REFERENCES users NOT NULL,
 			assigned BOOLEAN default FALSE,
-			status VARCHAR(254) CHECK(status = 'pending' OR status = 'approved' OR status = 'disapproved' ))";
+			status VARCHAR(254) default 'pending' CHECK(status = 'pending' OR status = 'approved' OR status = 'disapproved'))";
 
 	$result = pg_query($database, $init);
 
