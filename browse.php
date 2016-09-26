@@ -30,6 +30,7 @@
   }
 
   $myself_claim = false;
+  $claim_success = false;
 
   if($logined_in) {
     if(isset($_POST['claimTask'])) {
@@ -57,6 +58,8 @@
         if (!$result) {
            die("Database update error: " . pg_last_error());
         }
+
+        $claim_success = true;
       }
     }
   }
@@ -92,7 +95,13 @@
   </div>
 
   <?php 
-    if($myself_claim) {
+
+    if($claim_success) {
+        echo '<div class="alert fade in  alert-success">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  Claim successful!
+            </div>';
+    }else if($myself_claim) {
       echo '<div class="alert fade in  alert-danger">
                   <button type="button" class="close" data-dismiss="alert">×</button>
                   This is your task!
