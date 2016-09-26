@@ -29,7 +29,7 @@
     }
   }
 
-  $sql = "SELECT * FROM tasks WHERE assigner IS NULL";
+  $sql = "SELECT * FROM tasks t WHERE owner = '$username' OR assigner = '$username'";
 
   $tasks = pg_query($database, $sql);
 
