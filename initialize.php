@@ -2,7 +2,7 @@
 	include("config.php");
 
   // Let's initialize the tables used, and greate a test user.
-	$init = "CREATE TABLE IF NOT EXISTS users (username VARCHAR(254) PRIMARY KEY, password VARCHAR(254), type VARCHAR(6) CHECK(type='normal' OR type='admin'))";
+	$init = "CREATE TABLE IF NOT EXISTS users (username VARCHAR(254) PRIMARY KEY, password VARCHAR(254), salt VARCHAR(254), type VARCHAR(6) CHECK(type='normal' OR type='admin'))";
 	$result = pg_query($database, $init);
 
 	if (!$result) {
@@ -24,7 +24,7 @@
      die("Error in SQL query in initialize.php: " . pg_last_error());
   	}
 
-	$sql = "INSERT INTO users VALUES ('Mark', '1234', 'normal'), ('Lisa', 'abcd', 'normal'), ('admin', 'password', 'admin')";
+  $sql = "INSERT INTO users VALUES ('Mark', 'e3ce2f895ecde88c9a0ca3cfbab42644', '2f4c37ee681b2811440145f620f7b449', 'normal'), ('Lisa', '1f25376ecddf5bb9ee77573de2886e42', '4cf6fdafe5ab4f5401f682d147bfee80', 'normal'), ('admin', 'b6a7c7264267ceb82adb9e2c84d49edb', '72c2bb70b9062f123e21e34eac743f88', 'admin')";//Mark Password = 1234, Lisa = abcd, admin = password
 	$result = pg_query($database, $sql);
 
 	if (!$result) {
