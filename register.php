@@ -25,7 +25,10 @@
          $error = "Username is already taken!";
       }else {
          // Let's create the user!
-         $sql = "INSERT INTO users VALUES ('$username', '$password', 'normal')";
+		 $baseStr = time() . rand(0, 1000000) . rand(0, 1000000);
+	     $salt = md5($baseStr);
+		 $saltedPassword = md5($password . $salt);
+         $sql = "INSERT INTO users VALUES ('$username', '$saltedPassword', '$salt', 'normal')";
 
    		   $result = pg_query($database, $sql);
 
@@ -33,7 +36,9 @@
    			 	 die("Error in SQL query in register.php: " . pg_last_error());
    		   }
 
-         $error = "User created!";
+				 $message = urlencode("User created successfully!");
+				 header("Location:login.php?message=".$message);
+
       }
    }
 
@@ -50,9 +55,9 @@
 	</head>
 	<body>
 		<div class="container">
-		<table align="center" class="table">
+		<table class="table">
 			<tr> <td>
-			<h1> <u>Registration</u></h1>
+			<h1> <center>Registration</center></h1>
 			</td></tr>
 
 			<tr>

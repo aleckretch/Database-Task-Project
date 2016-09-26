@@ -29,11 +29,46 @@
     }
   }
 
+  $myself_claim = false;
+  $claim_success = false;
+
+  if($logined_in) {
+    if(isset($_POST['claimTask'])) {
+      $task_id = $_POST['claimTask'];
+
+      $sql = "SELECT * FROM tasks WHERE id = $task_id";
+
+      $result = pg_query($database, $sql);
+
+      if (!$result) {
+         die("Tasks owned fetch error: " . pg_last_error());
+      }
+
+      $task = pg_fetch_array($result);
+
+      $task_owner = $task[9];
+
+      if($username == $task_owner) {
+        $myself_claim = true;
+      } else {
+        $sql = "UPDATE tasks SET assigner = '$username' WHERE id = $task_id";
+
+        $result = pg_query($database, $sql);
+
+        if (!$result) {
+           die("Database update error: " . pg_last_error());
+        }
+
+        $claim_success = true;
+      }
+    }
+  }
+
   $sql = "SELECT * FROM tasks WHERE assigner IS NULL";
 
   $tasks = pg_query($database, $sql);
 
-  if (!$result) {
+  if (!$tasks) {
      die("Tasks owned fetch error: " . pg_last_error());
   }
  ?>
@@ -59,6 +94,22 @@
     <h3>Tasks List</h3>
   </div>
 
+  <?php 
+
+    if($claim_success) {
+        echo '<div class="alert fade in  alert-success">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  Claim successful!
+            </div>';
+    }else if($myself_claim) {
+      echo '<div class="alert fade in  alert-danger">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  This is your task!
+            </div>';
+    }
+  
+  ?>
+
   <table class="table table-borded table-hover">
     <thead>
       <th>ID</th>
@@ -66,22 +117,24 @@
       <th>Description</th>
       <th>Date</th>
       <th>Owner</th>
-      <th>View Detail</th>
+      <th>Claim The Task</th>
     </thead>
     <tbody>
+      <form action="browse.php" method="POST">
       <?php
         while ($row = pg_fetch_array($tasks)) {
              echo "<tr>
-                  <td>".$row[0]."</td>
-                  <td>".$row[1]."</td>
-                  <td>".$row[2]."</td>
-                  <td>".$row[3]."</td>
-                  <td>".$row[9]."</td>
-                  <td><a href='detail.php?task=".$row[0]."'>Detail</a></td>
+                    <td>".$row[0]."</td>
+                    <td>".$row[1]."</td>
+                    <td>".$row[2]."</td>
+                    <td>".$row[3]."</td>
+                    <td>".$row[9]."</td>
+                    <td><button type='submit' name='claimTask' class='btn btn-success' value='".$row[0]."'>Claim</button></td>
              </tr>";
          }
 
       ?>
+    </form>
     </tbody>
   </table>
 </div>

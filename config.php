@@ -1,15 +1,15 @@
 <?php
   $SQLSERVER = "localhost";
-  $SQLPORT = 5433;
+  $SQLPORT = 5432;
   $SQLUSERNAME = "postgres";
   $SQLPASSWORD = "sunzhihao";
-  $SQLDATABASE = "postgres";
+  $SQLDATABASE = "test";
 
-   $database = pg_connect("host=127.0.0.1 port=5433 dbname=postgres user=postgres password=sunzhihao");
+   $database = pg_connect("host=$SQLSERVER port=$SQLPORT dbname=$SQLDATABASE user=$SQLUSERNAME password=$SQLPASSWORD");
+
 
    if(!$database){
-         echo "Error : Unable to open database<br>";
+         echo "Error : Unable to open database<br>". pg_last_error();
    }
-
 
 ?>
