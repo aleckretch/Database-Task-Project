@@ -73,7 +73,7 @@
     }
   }
 
-  $sql = "SELECT * FROM tasks WHERE assigner IS NULL";
+  $sql = "SELECT * FROM tasks WHERE assigner IS NULL AND status='pending' AND owner!='$username' ORDER BY task_date ASC";
 
   $tasks = pg_query($database, $sql);
 
@@ -99,7 +99,6 @@
         ?>
         <li><a href="browse.php">Browse</a></li>
         <li><a href="newTask.php">Create new Task</a></li>
-        <li><a href="myTasks.php">My Tasks</a></li>
         <li><a href="logout.php">Logout</a></li>
     </ul>
   </div>
