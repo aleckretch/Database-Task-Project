@@ -29,6 +29,15 @@
     }
   }
 
+  $sql = "SELECT username FROM users WHERE username = '$username' AND type = 'admin'";
+  $result = pg_query($database, $sql);
+  $count = pg_num_rows($result);
+  $isAdmin = false;
+  if ($count == 1)
+  {
+    $isAdmin = true;
+  }
+
   $sql = "SELECT * FROM tasks t WHERE owner = '$username' OR assigner = '$username'";
 
   $tasks = pg_query($database, $sql);
@@ -48,6 +57,11 @@
   <div class="row">
     <ul class="nav navbar-nav">
          <li><a href="index.php">Home</a></li>
+         <?php
+          if($isAdmin) {
+            echo '<li><a href="adminAssign.php">Assign Tasks</a></li>';
+          }
+        ?>
         <li><a href="browse.php">Browse</a></li>
         <li><a href="newTask.php">Create new Task</a></li>
         <li><a href="myTasks.php">My Tasks</a></li>

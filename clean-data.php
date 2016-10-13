@@ -1,14 +1,14 @@
 <?php
 	include("config.php");
 
-	$clean = "DROP TABLE tasks";
+	$clean = "DROP TABLE IF EXISTS tasks";
 	$result = pg_query($database, $clean);
 
 	if (!$result) {
 		die("Error in SQL query: " . pg_last_error());
 	}
 
-	$clean = "DROP TABLE users";
+	$clean = "DROP TABLE IF EXISTS users";
 	$result = pg_query($database, $clean);
 
 	if (!$result) {
