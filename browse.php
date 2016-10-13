@@ -73,12 +73,71 @@
     }
   }
 
-  $sql = "SELECT * FROM tasks WHERE assigner IS NULL AND status='pending' AND owner!='$username' ORDER BY task_date ASC";
-
+  $today = date("Y-m-d");
+  $sql = "SELECT * FROM tasks WHERE assigner IS NULL AND status='pending' AND owner!='$username' AND task_date > '$today' ORDER BY task_date ASC";
   $tasks = pg_query($database, $sql);
 
   if (!$tasks) {
      die("Tasks owned fetch error: " . pg_last_error());
+  }
+
+  if(isset($_POST['searchSubmit'])) {
+    $query = "SELECT * FROM tasks WHERE assigner IS NULL AND status='pending' AND owner!='$username'";
+    if(isset($_POST['title']))
+    {
+      $title = $_POST['title'];
+      if ($title)
+      {
+        $query = "$query AND title LIKE '%$title%'";
+      }
+    }
+    if(isset($_POST['owner']))
+    {
+      $owner = $_POST['owner'];
+      if ($owner)
+      {
+        $query = "$query AND owner LIKE '%$owner%'";
+      }
+    }
+    if(isset($_POST['beforeDate']))
+    {
+      $beforeDate = $_POST['beforeDate'];
+      if ($beforeDate)
+      {
+        $query = "$query AND task_date < '$beforeDate'";
+      }
+    }
+    if(isset($_POST['afterDate']))
+    {
+      $afterDate = $_POST['afterDate'];
+      if ($afterDate)
+      {
+        $query = "$query AND task_date > '$afterDate'";
+      }
+    }
+    if(!isset($_POST['expired']))
+    {
+      $query = "$query AND task_date > '$today'";
+    }
+    $orderBy = $_POST['orderBy'];
+    $orderByString = "";
+    if ($orderBy == 0)
+    {
+      $orderByString = "DESC";
+    }
+    else
+    {
+      $orderByString = "ASC";
+    }
+    $query = "$query ORDER BY task_date $orderByString";
+
+    $filter_success = true;
+
+    $tasks = pg_query($database, $query);
+
+    if (!$tasks) {
+       die("Tasks owned fetch error: " . pg_last_error());
+    }
   }
  ?>
 
@@ -106,6 +165,7 @@
   <div class="row">
     <h3>Filter Tasks</h3>
   </div>
+
   <form method="POST" action="browse.php" >
     <div class="row">
     <div class="form-group">
@@ -115,29 +175,36 @@
 
     <div class="form-group">
       <label for="owner">Owner contains</label><br/>
-      <input type="text" id="owner" name="owner" required class="form-control"></input>
+      <input type="text" id="owner" name="owner" class="form-control"></input>
     </div>
 
     <div class="form-group">
       <label for="beforeDate">Before date</label><br/>
-      <input type="date" id="beforeDate" name="beforeDate" required class="form-control" />
+      <input type="date" id="beforeDate" name="beforeDate" class="form-control" />
     </div>
 
     <div class="form-group">
       <label for="afterDate">After date</label><br/>
-      <input type="date" id="afterDate" name="afterDate" required class="form-control" />
+      <input type="date" id="afterDate" name="afterDate" class="form-control" />
     </div>
 
     <div class="form-group">
-      <label for="expired">Exclude expired tasks?</label><br/>
-      <input type="checkbox" id="expired" name="expired" required class="form-control" />
+      <label for="expired">Include expired tasks?</label><br/>
+      <input type="checkbox" id="expired" name="expired" class="form-control" />
     </div>
 
-    <input type="submit" name="formSubmit" value="Search!" class="btn btn-success" />
+    <div class="form-group">
+      <label for="expired">Order by ascending date</label><br/>
+      <input type="radio" id="ascending" name="orderBy" value="1" class="form-control" />
+      <label for="expired">Order by descending date</label><br/>
+      <input type="radio" id="descending" name="orderBy" value="0" class="form-control" />
+    </div>
+
+    <input type="submit" name="searchSubmit" value="Search!" class="btn btn-success" />
   </form>
 
   <div class="row">
-    <h3>Tasks List</h3>
+    <h3>Open Tasks List</h3>
   </div>
 
   <?php 
@@ -151,6 +218,13 @@
       echo '<div class="alert fade in  alert-danger">
                   <button type="button" class="close" data-dismiss="alert">×</button>
                   This is your task!
+            </div>';
+    }
+
+    if($filter_success) {
+        echo '<div class="alert fade in  alert-success">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  Filter successful!
             </div>';
     }
   
