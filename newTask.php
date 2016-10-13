@@ -40,27 +40,43 @@
         $description = $_POST['description'];
         $date = $_POST['date'];
         $starttime = $_POST['starttime'];
+        $fullStartDate = "$date $starttime:00.0";
         $endtime = $_POST['endtime'];
+        $fullEndDate = "$date $endtime:00.0";
+        $now = time();
+        $formatFullStartDate = strtotime($fullStartDate);
+        $formatFullEndDate = strtotime($fullEndDate);
 
-        $start_arr = explode(":" , $starttime);
-        $end_arr = explode(":" , $endtime);
-
-        $start_hour = intval($start_arr[0]);
-        $start_min = intval($start_arr[1]);
-        $end_hour = intval($end_arr[0]);
-        $end_min = intval($end_arr[1]);
-
-        $sql = "INSERT INTO tasks (title , description , task_date , start_hour , start_min, end_hour, end_min, owner) VALUES('$title' , '$description' , '$date', $start_hour, $start_min , $end_hour , $end_min , '$username')";
-
-        // echo $sql;
-
-        $result = pg_query($database, $sql);
-
-        if (!$result) {
-            die("Error in SQL query: " . pg_last_error());
+        if ($now > $formatFullStartDate)
+        {
+          $error_message = "Please enter a date that has not already occurred!";
         }
+        else if ($formatFullStartDate > $formatFullEndDate)
+        {
+          $error_message = "The task must start before it can end!";
+        }
+        else
+        {
+          $start_arr = explode(":" , $starttime);
+          $end_arr = explode(":" , $endtime);
 
-        $success = true;
+          $start_hour = intval($start_arr[0]);
+          $start_min = intval($start_arr[1]);
+          $end_hour = intval($end_arr[0]);
+          $end_min = intval($end_arr[1]);
+
+          $sql = "INSERT INTO tasks (title , description , task_date , start_hour , start_min, end_hour, end_min, owner) VALUES('$title' , '$description' , '$date', $start_hour, $start_min , $end_hour , $end_min , '$username')";
+
+          // echo $sql;
+
+          $result = pg_query($database, $sql);
+
+          if (!$result) {
+              die("Error in SQL query: " . pg_last_error());
+          }
+
+          $success = true;
+        }
     } else {
       $error_message = "Info missed";
     }
