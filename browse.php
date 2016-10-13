@@ -104,6 +104,39 @@
   </div>
 
   <div class="row">
+    <h3>Filter Tasks</h3>
+  </div>
+  <form method="POST" action="browse.php" >
+    <div class="row">
+    <div class="form-group">
+      <label for="title">Title contains</label>
+      <input type="text" id="title" name="title" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="owner">Owner contains</label><br/>
+      <input type="text" id="owner" name="owner" required class="form-control"></input>
+    </div>
+
+    <div class="form-group">
+      <label for="beforeDate">Before date</label><br/>
+      <input type="date" id="beforeDate" name="beforeDate" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="afterDate">After date</label><br/>
+      <input type="date" id="afterDate" name="afterDate" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="expired">Exclude expired tasks?</label><br/>
+      <input type="checkbox" id="expired" name="expired" required class="form-control" />
+    </div>
+
+    <input type="submit" name="formSubmit" value="Search!" class="btn btn-success" />
+  </form>
+
+  <div class="row">
     <h3>Tasks List</h3>
   </div>
 
