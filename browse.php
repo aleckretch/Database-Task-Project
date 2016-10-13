@@ -129,6 +129,7 @@
       <th>Title</th>
       <th>Description</th>
       <th>Date</th>
+      <th>Time</th>
       <th>Owner</th>
       <th>Claim The Task</th>
     </thead>
@@ -141,6 +142,7 @@
                     <td>".$row[1]."</td>
                     <td>".$row[2]."</td>
                     <td>".$row[3]."</td>
+                    <td>".$row[4].":".$row[5]." - ".$row[6].":".$row[7]."</td>
                     <td>".$row[9]."</td>
                     <td><button type='submit' name='claimTask' class='btn btn-success' value='".$row[0]."'>Claim</button></td>
              </tr>";
