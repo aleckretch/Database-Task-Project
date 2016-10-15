@@ -9,7 +9,11 @@
 
 
    if(!$database){
-         echo "Error : Unable to open database<br>". pg_last_error();
+	     $SQLPORT = 5432;
+		 $database = pg_connect("host=$SQLSERVER port=$SQLPORT dbname=$SQLDATABASE user=$SQLUSERNAME password=$SQLPASSWORD");
+		 if(!$database){
+			echo "Error : Unable to open database in config.php<br>". pg_last_error();
+		 }
    }
 
 ?>

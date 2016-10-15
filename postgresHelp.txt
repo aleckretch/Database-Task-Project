@@ -2,13 +2,14 @@ With cmd go to C:\Bitnami\wappstack-5.6.25-0\postgresql\bin and run
 
 psql.exe -U postgres
 ALTER USER postgres with password 'sunzhihao'; -- Give user the password expected by server
-CREATE DATABASE test with OWNER = postgres; -- Create database test
+CREATE DATABASE postgres with OWNER = postgres; -- Create database test
 \q -- Quit out of that menu
 psql.exe test postgres -- Open psql again, but this time to manage the database 'test' as user postgres
 
 CREATE TABLE IF NOT EXISTS users (
 username VARCHAR(254) PRIMARY KEY,
-password VARCHAR(254), 
+password VARCHAR(254),
+salt VARCHAR(254),
 type VARCHAR(6) CHECK(type='normal' OR type='admin'));
 
 CREATE TABLE IF NOT EXISTS tasks (id integer PRIMARY KEY, title VARCHAR(40) NOT NULL, 
