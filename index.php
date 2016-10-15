@@ -111,7 +111,25 @@
  ?>
 
 <html>
-<head> <title>Task management system</title> </head>
+<head> <title>Task management system</title> 
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.6/dt-1.10.12/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.6/dt-1.10.12/datatables.min.js"></script>
+
+<script>
+	jQuery.noConflict();
+	jQuery(document).ready(function() {
+		jQuery('#task_owned_table').DataTable();
+		jQuery('#task_assigned_table').DataTable();
+		jQuery('#task_claimed_table').DataTable();
+	});
+</script>
+
+
+</head>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <body>
@@ -138,7 +156,7 @@
     <h3>Tasks Owned</h3>
   </div>
 
-  <table class="table table-borded table-hover">
+  <table id="task_owned_table" class="table table-borded table-hover">
     <thead>
       <th>ID</th>
       <th>Title</th>
@@ -204,7 +222,7 @@
   
   ?>
 
-  <table class="table table-borded table-hover">
+  <table id="task_assigned_table" class="table table-borded table-hover">
     <thead>
       <th>ID</th>
       <th>Title</th>
@@ -218,12 +236,20 @@
       <form action="index.php" method="POST">
       <?php
         while ($row = pg_fetch_array($tasks_assigned)) {
+			$startMin = $row[5]; 
+			if($startMin==0){
+				$startMin = "00";
+			}
+			$endMin = $row[7];
+			if($endMin == 0){
+				$endMin = "00";
+			}
              echo "<tr>
                   <td>".$row[0]."</td>
                   <td>".$row[1]."</td>
                   <td>".$row[2]."</td>
                   <td>".$row[3]."</td>
-                  <td>".$row[4].":".$row[5]." - ".$row[6].":".$row[7]."</td>
+                  <td>".$row[4].":".$startMin." - ".$row[6].":".$endMin."</td>
                   <td>".$row[9]."</td>";
               if ($row['status'] == "completed")
               {
@@ -244,7 +270,7 @@
     <h3>Tasks Claimed</h3>
   </div>
 
-  <table class="table table-borded table-hover">
+  <table id="task_claimed_table" class="table table-borded table-hover">
     <thead>
       <th>ID</th>
       <th>Title</th>
@@ -256,12 +282,20 @@
     <tbody>
       <?php
         while ($row = pg_fetch_array($tasks_claimed)) {
+			$startMin = $row[5]; 
+			if($startMin==0){
+				$startMin = "00";
+			}
+			$endMin = $row[7];
+			if($endMin == 0){
+				$endMin = "00";
+			}
              echo "<tr>
                   <td>".$row[0]."</td>
                   <td>".$row[1]."</td>
                   <td>".$row[2]."</td>
                   <td>".$row[3]."</td>
-                  <td>".$row[4].":".$row[5]." - ".$row[6].":".$row[7]."</td>
+                  <td>".$row[4].":".$startMin." - ".$row[6].":".$endMin."</td>
                   <td>".$row[9]."</td>
              </tr>";
          }

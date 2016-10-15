@@ -142,7 +142,7 @@
  ?>
 
 <html>
-<head> <title>Task management system</title> </head>
+<head> <title>Task management system</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
@@ -255,12 +255,21 @@
       <form action="browse.php" method="POST">
       <?php
         while ($row = pg_fetch_array($tasks)) {
+			$startMin = $row[5]; 
+			if($startMin==0){
+				$startMin = "00";
+			}
+			$endMin = $row[7];
+			if($endMin == 0){
+				$endMin = "00";
+			}
+			
              echo "<tr>
                     <td>".$row[0]."</td>
                     <td>".$row[1]."</td>
                     <td>".$row[2]."</td>
                     <td>".$row[3]."</td>
-                    <td>".$row[4].":".$row[5]." - ".$row[6].":".$row[7]."</td>
+                    <td>".$row[4].":".$startMin." - ".$row[6].":".$endMin."</td>
                     <td>".$row[9]."</td>
                     <td><button type='submit' name='claimTask' class='btn btn-success' value='".$row[0]."'>Claim</button></td>
              </tr>";
