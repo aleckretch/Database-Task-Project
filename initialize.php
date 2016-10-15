@@ -34,8 +34,11 @@
       die("Error in SQL query in initialize.php: " . pg_last_error());
  	}
 
- 	$sql = "INSERT INTO tasks (title , description , task_date , start_hour , start_min, end_hour, end_min, owner, status) VALUES('Second Task' , 'Second task to show.' , '2016-10-04', 8, 30 , 10 , 30 , 'Mark', 'pending')
-,('Third Task' , 'Third task to show.' , '2016-10-05', 9, 30 , 11 , 30 , 'Mark', 'pending')
+ 	$sql = "INSERT INTO tasks (title , description , task_date , start_hour , start_min, end_hour, end_min, owner, status) VALUES
+	('Second Task' , 'Second task to show.' , '2016-10-04', 8, 30 , 10 , 30 , 'Mark', 'pending'),
+	('Third Task' , 'Third task to show.' , '2016-10-05', 9, 30 , 11 , 30 , 'Mark', 'pending'),
+	('Water Plants', 'Water the plants near the front desk', '2016-10-15', 9, 00, 9, 15, 'Lisa', 'pending'),
+	('Complete TPS Reports', 'Mandatory, needs to be done this Saturday', '2016-10-15', 9, 00, 5, 00, 'Lisa', 'pending')
 ";
 	$result = pg_query($database, $sql);
 

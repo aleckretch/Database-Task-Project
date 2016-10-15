@@ -144,7 +144,19 @@
 <html>
 <head> <title>Task management system</title> </head>
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.6/dt-1.10.12/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.6/dt-1.10.12/datatables.min.js"></script>
+
+<script>
+	jQuery.noConflict();
+	jQuery(document).ready(function() {
+		jQuery('#task_table').DataTable();
+	});
+</script>
+</head>
 <body>
 <div class="container">
 
@@ -193,11 +205,10 @@
       <input type="checkbox" id="expired" name="expired" class="form-control" />
     </div>
 
-    <div class="form-group">
-      <label for="expired">Order by ascending date</label><br/>
-      <input type="radio" id="ascending" name="orderBy" value="1" class="form-control" />
-      <label for="expired">Order by descending date</label><br/>
-      <input type="radio" id="descending" name="orderBy" value="0" class="form-control" />
+    <div class="form-group form-group-sm">
+      <label for="expired">Order by date</label><br/>
+      Ascending<input type="radio" id="ascending" name="orderBy" value="1" class="form-control" />
+      Descending<input type="radio" id="descending" name="orderBy" value="0" class="form-control" />
     </div>
 
     <input type="submit" name="searchSubmit" value="Search!" class="btn btn-success" />
@@ -230,7 +241,7 @@
   
   ?>
 
-  <table class="table table-borded table-hover">
+  <table id="task_table" class="table table-borded table-hover">
     <thead>
       <th>ID</th>
       <th>Title</th>
@@ -259,6 +270,7 @@
     </form>
     </tbody>
   </table>
+
 </div>
 
 </body>
